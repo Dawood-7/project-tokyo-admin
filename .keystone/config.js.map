@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../keystone.ts"],
+  "sourcesContent": ["import { config, list } from '@keystone-6/core'\nimport { allowAll } from '@keystone-6/core/access'\nimport { text } from '@keystone-6/core/fields'\nimport 'dotenv/config'\n\nconst getDatabaseUrl = (): string => {\n    if (!process.env.DATABASE_URL) {\n        throw new Error('Please provide a DATABASE_URL environment variable inside .env.local')\n    }\n    return process.env.DATABASE_URL\n}\n\nexport default config({\n  db: {\n    provider: \"postgresql\",\n    url: getDatabaseUrl(),\n  },\n  lists: {\n    User: list({\n      access: allowAll,\n      fields: {\n        name: text({ validation: { isRequired: true } }),\n        email: text({ isIndexed: \"unique\", validation: { isRequired: true } }),\n      },\n    }),\n  },\n});\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,kBAA6B;AAC7B,oBAAyB;AACzB,oBAAqB;AACrB,oBAAO;AAEP,IAAM,iBAAiB,MAAc;AACjC,MAAI,CAAC,QAAQ,IAAI,cAAc;AAC3B,UAAM,IAAI,MAAM,sEAAsE;AAAA,EAC1F;AACA,SAAO,QAAQ,IAAI;AACvB;AAEA,IAAO,uBAAQ,oBAAO;AAAA,EACpB,IAAI;AAAA,IACF,UAAU;AAAA,IACV,KAAK,eAAe;AAAA,EACtB;AAAA,EACA,OAAO;AAAA,IACL,UAAM,kBAAK;AAAA,MACT,QAAQ;AAAA,MACR,QAAQ;AAAA,QACN,UAAM,oBAAK,EAAE,YAAY,EAAE,YAAY,KAAK,EAAE,CAAC;AAAA,QAC/C,WAAO,oBAAK,EAAE,WAAW,UAAU,YAAY,EAAE,YAAY,KAAK,EAAE,CAAC;AAAA,MACvE;AAAA,IACF,CAAC;AAAA,EACH;AACF,CAAC;",
+  "names": []
+}

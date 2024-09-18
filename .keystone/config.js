@@ -22,29 +22,35 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
+var import_core2 = require("@keystone-6/core");
+var import_config = require("dotenv/config");
+
+// schema.ts
 var import_core = require("@keystone-6/core");
 var import_access = require("@keystone-6/core/access");
 var import_fields = require("@keystone-6/core/fields");
-var import_config = require("dotenv/config");
+var lists = {
+  User: (0, import_core.list)({
+    access: import_access.allowAll,
+    fields: {
+      name: (0, import_fields.text)({ validation: { isRequired: true } }),
+      email: (0, import_fields.text)({ isIndexed: "unique", validation: { isRequired: true } })
+    }
+  })
+};
+
+// keystone.ts
 var getDatabaseUrl = () => {
   if (!process.env.DATABASE_URL) {
     throw new Error("Please provide a DATABASE_URL environment variable inside .env.local");
   }
   return process.env.DATABASE_URL;
 };
-var keystone_default = (0, import_core.config)({
+var keystone_default = (0, import_core2.config)({
   db: {
     provider: "postgresql",
     url: getDatabaseUrl()
   },
-  lists: {
-    User: (0, import_core.list)({
-      access: import_access.allowAll,
-      fields: {
-        name: (0, import_fields.text)({ validation: { isRequired: true } }),
-        email: (0, import_fields.text)({ isIndexed: "unique", validation: { isRequired: true } })
-      }
-    })
-  }
+  lists
 });
 //# sourceMappingURL=config.js.map

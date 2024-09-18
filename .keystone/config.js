@@ -35,7 +35,19 @@ var lists = {
     access: import_access.allowAll,
     fields: {
       name: (0, import_fields.text)({ validation: { isRequired: true } }),
-      email: (0, import_fields.text)({ isIndexed: "unique", validation: { isRequired: true } })
+      email: (0, import_fields.text)({ isIndexed: "unique", validation: { isRequired: true } }),
+      password: (0, import_fields.password)({
+        validation: {
+          isRequired: true,
+          length: {
+            min: 8,
+            max: 1e3
+          },
+          rejectCommon: true
+        }
+        //   bcrypt: require('bcrypt')
+      }),
+      isAdmin: (0, import_fields.checkbox)({ defaultValue: false })
     }
   }),
   Post: (0, import_core.list)({
@@ -53,7 +65,16 @@ var lists = {
           [1, 2],
           [1, 2, 1]
         ]
-      })
+      }),
+      //   thumbnail: image({ storage: "local" }),
+      author: (0, import_fields.relationship)({ ref: "Author.posts", many: false })
+    }
+  }),
+  Author: (0, import_core.list)({
+    access: import_access.allowAll,
+    fields: {
+      name: (0, import_fields.text)({ validation: { isRequired: true } }),
+      posts: (0, import_fields.relationship)({ ref: "Post.author", many: true })
     }
   })
 };

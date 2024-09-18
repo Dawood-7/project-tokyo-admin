@@ -24,25 +24,25 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/authors": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/authors.js"
+    ],
     "/posts": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/posts.js"
     ],
-    "/posts/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/posts/[id].js"
-    ],
-    "/posts/create": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/posts/create.js"
-    ],
     "/users": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/users.js"
+    ],
+    "/users/create": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/users/create.js"
     ]
   },
   "ampFirstPages": []

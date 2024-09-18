@@ -1,7 +1,6 @@
-import { config, list } from '@keystone-6/core'
-import { allowAll } from '@keystone-6/core/access'
-import { text } from '@keystone-6/core/fields'
+import { config } from '@keystone-6/core'
 import 'dotenv/config'
+import { lists } from './schema'
 
 const getDatabaseUrl = (): string => {
     if (!process.env.DATABASE_URL) {
@@ -15,13 +14,5 @@ export default config({
     provider: "postgresql",
     url: getDatabaseUrl(),
   },
-  lists: {
-    User: list({
-      access: allowAll,
-      fields: {
-        name: text({ validation: { isRequired: true } }),
-        email: text({ isIndexed: "unique", validation: { isRequired: true } }),
-      },
-    }),
-  },
+  lists,
 });
